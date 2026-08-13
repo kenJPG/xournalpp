@@ -72,6 +72,9 @@ public:
     inline void setJustify(bool j) { this->justify = j; }
     inline bool getJustify() const { return justify; }
 
+    /// Invalidate the cached size (e.g. after a global line spacing change)
+    inline void invalidateSize() { this->sizeCalculated = false; }
+
     auto cloneText() const -> std::unique_ptr<Text>;
     auto clone() const -> ElementPtr override;
 

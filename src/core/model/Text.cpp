@@ -13,6 +13,7 @@
 #include "util/Rectangle.h"       // for Rectangle
 #include "util/Stacktrace.h"      // for Stacktrace
 #include "util/StringUtils.h"
+#include "util/LineSpacing.h"                      // for xoj::util::lineSpacing
 #include "util/raii/GObjectSPtr.h"
 #include "util/safe_casts.h"                      // for round_cast
 #include "util/serializing/ObjectInputStream.h"   // for ObjectInputStream
@@ -134,7 +135,7 @@ auto Text::createPangoLayout() const -> xoj::util::GObjectSPtr<PangoLayout> {
     pango_layout_set_alignment(layout.get(), this->align.toPango());
 
 #if PANGO_VERSION_CHECK(1, 48, 5)  // see https://gitlab.gnome.org/GNOME/pango/-/issues/499
-    pango_layout_set_line_spacing(layout.get(), 1.0);
+    pango_layout_set_line_spacing(layout.get(), xoj::util::lineSpacing);
 #endif
 
     updatePangoFont(layout.get());

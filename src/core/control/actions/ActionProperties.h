@@ -828,6 +828,19 @@ struct ActionProperties<Action::TEXT_JUSTIFY> {
 };
 
 template <>
+struct ActionProperties<Action::LINE_SPACING> {
+    using state_type = double;
+    using parameter_type = state_type;
+    static state_type initialState(Control* ctrl) { return ctrl->getSettings()->getLineSpacing(); }
+    static void callback(GSimpleAction* ga, GVariant* p, Control* ctrl) {
+        g_simple_action_set_state(ga, p);
+        double lineSpacing = getGVariantValue<double>(p);
+        ctrl->getSettings()->setLineSpacing(lineSpacing);
+        ctrl->refreshTextLayout();
+    }
+};
+
+template <>
 struct ActionProperties<Action::AUDIO_RECORD> {
     using state_type = bool;
     static constexpr state_type initialState(Control*) { return false; }

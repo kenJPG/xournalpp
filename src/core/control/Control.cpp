@@ -2621,6 +2621,30 @@ void Control::fontChanged(const XojFont& font) {
     }
 }
 
+void Control::refreshTextLayout() {
+    Document* doc = getDocument();
+    if (doc == nullptr) {
+        return;
+    }
+
+    doc->lock();
+    for (size_t p = 0; p < doc->getPageCount(); ++p) {
+        auto page = doc->getPage(p);
+        for (Layer* layer: page->getLayers()) {
+            for (auto& e: layer->getElements()) {
+                if (e->getType() == ELEMENT_TEXT) {
+                    static_cast<Text*>(e.get())->invalidateSize();
+                }
+            }
+        }
+    }
+    doc->unlock();
+
+    for (size_t p = 0; p < doc->getPageCount(); ++p) {
+        firePageChanged(p);
+    }
+}
+
 /**
  * GETTER / SETTER
  */

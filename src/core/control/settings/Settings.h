@@ -161,6 +161,12 @@ public:
     void setFont(const XojFont& font);
 
     /**
+     * Global note text line spacing factor (Pango). 1.0 = default, < 1.0 = tighter.
+     */
+    double getLineSpacing() const;
+    void setLineSpacing(double lineSpacing);
+
+    /**
      * The selected Toolbar
      */
     void setSelectedToolbar(const std::string& name);
@@ -787,6 +793,11 @@ private:
      * The last used font
      */
     XojFont font;
+
+    /**
+     * Global note text line spacing factor (Pango).
+     */
+    double lineSpacing = 0.8;
 
     /**
      * Base speed (as a percentage of visible canvas) of edge pan per

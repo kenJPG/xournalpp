@@ -308,6 +308,10 @@ public:
     ToolHandler* getToolHandler() const;
     ZoomControl* getZoomControl() const;
     Document* getDocument() const;
+
+    /// Recompute the size of every text element (e.g. after a global line spacing change) and repaint all pages.
+    void refreshTextLayout();
+
     UndoRedoHandler* getUndoRedoHandler() const;
     MainWindow* getWindow() const;
     GtkWindow* getGtkWindow() const;

@@ -142,6 +142,7 @@ enum class Action : size_t {
     FONT,  ///< Action whose state is the font's description
     TEXT_ALIGNMENT,
     TEXT_JUSTIFY,
+    LINE_SPACING,  ///< Action whose state is the note text line spacing factor (Pango)
 
     // Plugin Menu
     PLUGIN_MANAGER,
